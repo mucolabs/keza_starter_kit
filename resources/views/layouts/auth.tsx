@@ -22,7 +22,7 @@ export default function AuthLayout({
       <Head title={title} />
       <Container
         size="xs"
-        className="z-50 flex w-full flex-col gap-8 bg-white/95 p-6 ring-1 ring-zinc-950/5 drop-shadow-sm sm:p-10 lg:rounded-2xl lg:p-10"
+        className="z-50 flex w-full flex-col gap-8 bg-white/85 p-6 ring-1 ring-zinc-950/5 drop-shadow-sm sm:p-10 lg:rounded-2xl lg:p-10"
       >
         <div className="flex flex-col gap-10">
           <section className="flex flex-col gap-10">
