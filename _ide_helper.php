@@ -18570,6 +18570,65 @@ namespace Illuminate\Http {
                         return \Illuminate\Http\Request::inertia();
         }
             }
+            /**
+     * 
+     *
+     */        class RedirectResponse {
+                    /**
+         * 
+         *
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @param \App\Enums\NotificationType $type
+         * @param string $message
+         * @static 
+         */        public static function flash($type, $message)
+        {
+                        return \Illuminate\Http\RedirectResponse::flash($type, $message);
+        }
+                    /**
+         * Sets a successful flash message
+         *
+         * @param string $message - The success message to be displayed
+         * @return void 
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @static 
+         */        public static function success($message)
+        {
+                        \Illuminate\Http\RedirectResponse::success($message);
+        }
+                    /**
+         * Sets an informational flash message
+         *
+         * @param string $message - The informational message to be displayed
+         * @return void 
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @static 
+         */        public static function info($message)
+        {
+                        \Illuminate\Http\RedirectResponse::info($message);
+        }
+                    /**
+         * 
+         *
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @param string $message
+         * @static 
+         */        public static function warning($message)
+        {
+                        return \Illuminate\Http\RedirectResponse::warning($message);
+        }
+                    /**
+         * Sets an error flash message
+         *
+         * @param string $message - The error message to be displayed
+         * @return void 
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @static 
+         */        public static function error($message)
+        {
+                        \Illuminate\Http\RedirectResponse::error($message);
+        }
+            }
     }
 
 namespace Illuminate\Routing {
