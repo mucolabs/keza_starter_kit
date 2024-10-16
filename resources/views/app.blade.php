@@ -5,11 +5,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{-- <title inertia>{{ config('app.name', 'Keza') }}</title> --}}
         <title inertia>A minimalist, beautiful, and production-ready starter kit - {{config('app.name', 'Keza')}}</title>
-
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        @vite(['resources/app.tsx', "resources/assets/css/app.css", "resources/views/pages/{$page['component']}.tsx"])
+        @vite([
+            'resources/app.tsx',
+            "resources/views/pages/{$page['component']}.tsx",
+            !config("app.env") !== 'production' ? "resources/assets/css/app.css" : "",
+            !config("app.env") !== 'production' ? "resources/assets/css/fonts.css": ""
+        ])
         @inertiaHead
 
         <script data-mantine-script="true">
