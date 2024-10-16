@@ -11,17 +11,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Response, ResponseFactory};
 
 class SignupController extends Controller
 {
     /**
      * Display the registration view.
      */
-    public function create(): Response
+    public function create(): ResponseFactory|Response
     {
-        return Inertia::render('Auth/Register');
+        return inertia("auth/signup");
     }
 
     /**
