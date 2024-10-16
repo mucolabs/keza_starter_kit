@@ -13,6 +13,7 @@
     "laravel/framework": "^11.9",
     "laravel/sanctum": "^4.0",
     "laravel/tinker": "^2.9",
+    "pinkary-project/type-guard": "^0.1.0",
     "spatie/laravel-data": "^4.10",
     "spatie/laravel-typescript-transformer": "^2.5",
     "tightenco/ziggy": "^2.0"
