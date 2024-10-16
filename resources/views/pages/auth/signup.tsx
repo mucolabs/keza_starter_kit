@@ -21,7 +21,7 @@ export default function SignupPage() {
             Already have an account?{' '}
             <Link
               href={route('login')}
-              className="underline hover:text-amber-600"
+              className="underline hover:text-brand-500"
             >
               Login
             </Link>

@@ -3,7 +3,6 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {{-- <title inertia>{{ config('app.name', 'Keza') }}</title> --}}
         <title inertia>A minimalist, beautiful, and production-ready starter kit - {{config('app.name', 'Keza')}}</title>
         <!-- Scripts -->
         @routes

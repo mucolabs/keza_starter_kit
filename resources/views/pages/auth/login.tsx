@@ -60,7 +60,7 @@ export default function LoginPage() {
         <div className="flex flex-col gap-5">
           <TextInput
             name="email"
-            placeholder="nom@example.com"
+            placeholder="name@example.com"
             label="Email Address"
             required
             error={form.errors.email}
@@ -90,7 +90,7 @@ export default function LoginPage() {
               }}
             />
             <Link
-              href={'/forgot-password'}
+              href={route('password.request')}
               className="text-sm underline hover:text-brand-500"
             >
               Forgot your password ?

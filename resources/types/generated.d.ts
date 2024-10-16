@@ -30,4 +30,7 @@ export type LoginCreatePage = {
 canResetPassword: boolean;
 status: string | null;
 };
+export type PasswordResetLinkCreatePage = {
+status: string | null;
+};
 }
