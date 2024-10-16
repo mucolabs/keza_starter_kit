@@ -1,0 +1,38 @@
+{
+  "plugins": ["eslint-plugin-tailwindcss", "eslint-plugin-react-compiler"],
+  "extends": [
+    "@adonisjs/eslint-config/app",
+    "plugin:tailwindcss/recommended",
+    "plugin:react/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended"
+  ],
+
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react-compiler/react-compiler": "error",
+    "react/react-in-jsx-scope": "off",
+    "tailwindcss/classnames-order": "off",
+    "tailwindcss/no-custom-classname": [
+      "warn",
+      {
+        "callees": ["twMerge"],
+        "cssFiles": []
+      }
+    ]
+  }
+}
+
+/*
+"eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:import/recommended",
+    "plugin:jsx-a11y/recommended",
+
+*/
