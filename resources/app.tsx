@@ -6,8 +6,8 @@ import '~/bootstrap'
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
 import { createRoot, hydrateRoot } from 'react-dom/client'
+import { seo } from '~/config/seo'
 import { ThemeProvider } from '~/theme'
-import { seo } from './config/seo'
 
 const appName = import.meta.env.VITE_APP_NAME || seo.name
 

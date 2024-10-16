@@ -6,7 +6,11 @@ import { watch } from 'vite-plugin-watch'
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     laravel({
-      input: 'resources/app.tsx',
+      input: [
+        'resources/assets/css/app.css',
+        'resources/assets/css/fonts.css',
+        'resources/app.tsx',
+      ],
       ssr: 'resources/ssr.tsx',
       refresh: true,
     }),

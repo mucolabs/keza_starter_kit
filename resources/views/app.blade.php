@@ -9,10 +9,10 @@
         @routes
         @viteReactRefresh
         @vite([
+            'resources/assets/css/app.css',
+            'resources/assets/css/fonts.css',
             'resources/app.tsx',
-            "resources/views/pages/{$page['component']}.tsx",
-            !config("app.env") !== 'production' ? "resources/assets/css/app.css" : "",
-            !config("app.env") !== 'production' ? "resources/assets/css/fonts.css": ""
+            "resources/views/pages/{$page['component']}.tsx"
         ])
         @inertiaHead
 
