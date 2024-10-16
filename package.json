@@ -2,17 +2,23 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "build": "tsc && vite build && vite build --ssr",
-    "dev": "vite"
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "icons:add": "sly add",
+    "icons:build": "tsx ./scripts/build_icons"
   },
   "dependencies": {
     "@mantine/core": "^7.13.2",
     "@mantine/hooks": "^7.13.2",
     "clsx": "^2.1.1",
-    "react-compiler-runtime": "^0.0.0-experimental-605e95c-20241015",
-    "tailwind-merge": "^2.5.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-compiler-runtime": "^0.0.0-experimental-605e95c-20241015",
+    "react-dom": "^18.3.1",
+    "sonner": "^1.5.0",
+    "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
     "@headlessui/react": "^2.1.10",
