@@ -21,7 +21,7 @@ class LoginController extends Controller
      */
     public function create(): ResponseFactory|Response
     {
-        return inertia("Auth/Login", LoginCreatePage::from([
+        return inertia("auth/login", LoginCreatePage::from([
             "canResetPassword" => Route::has("password.request"),
             "status" => session("session")
         ]));
