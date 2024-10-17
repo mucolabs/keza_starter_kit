@@ -2,69 +2,47 @@
 
 namespace App\Providers;
 
+use App\Enums\FlashMessageType;
 use App\Enums\NotificationType;
+use App\Notifications\Alert;
+use App\Notifications\Toast;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
 class InertiaServiceProvider extends ServiceProvider
 {
+
+
+
+
     /**
      * Register services.
      */
     public function register(): void
     {
-        RedirectResponse::macro("flash", function (NotificationType $type, string $message) {
-            session()->flash("notification", ["type" => $type, "message" => $message]);
-
-            /** @var RedirectResponse $this */
-            return $this;
-        });
-
-        /**
-         * Sets a successful flash message
-         * @param string $message - The success message to be displayed
-         *
-         * @return void
-         */
-        RedirectResponse::macro('success', function (string $message) {
-            /** @var RedirectResponse $this */
-            return $this->flash(NotificationType::Success, $message);
-        });
 
 
         /**
-         * Sets an informational flash message
-         * @param string $message - The informational message to be displayed
-         *
-         * @return void
+         * Registers the alert macro on the session.
+         * @return \App\Notifications\Alert
          */
-        RedirectResponse::macro('info', function (string $message) {
-            /** @var RedirectResponse $this */
-            return $this->flash(NotificationType::Info, $message);
-        });
-
-        RedirectResponse::macro('warning', function (string $message) {
-            /** @var RedirectResponse $this */
-            return $this->flash(NotificationType::Warning, $message);
+        Session::macro("alert", function (): Alert {
+            return new Alert();
         });
 
         /**
-         * Sets an error flash message
-         * @param string $message - The error message to be displayed
-         *
-         * @return void
+         * Registers the toast macro on the session
+         * @return \App\Notifications\Toast
          */
-        RedirectResponse::macro('error', function (string $message) {
+        RedirectResponse::macro("toast", function (): Toast {
             /** @var RedirectResponse $this */
-            return $this->flash(NotificationType::Error, $message);
+            return new Toast($this);
         });
     }
 
     /**
      * Bootstrap services.
      */
-    public function boot(): void
-    {
-        //
-    }
+    public function boot(): void {}
 }

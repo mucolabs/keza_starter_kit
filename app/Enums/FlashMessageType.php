@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Enums;
 
 use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
 #[TypeScript]
-enum NotificationType: string
+enum FlashMessageType: string
 {
     case Success  = "success";
     case Info = "info";

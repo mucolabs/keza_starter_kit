@@ -2,6 +2,7 @@
 declare module 'ziggy-js' {
   interface RouteList {
     "sanctum.csrf-cookie": [],
+    "execute-laravel-error-solution": [],
     "welcome": [],
     "dashboard": [],
     "profile.edit": [],

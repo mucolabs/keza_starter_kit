@@ -7,10 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Inertia\{Response, ResponseFactory};
 
 class SignupController extends Controller
@@ -40,6 +38,10 @@ class SignupController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        $appName = type(config("app.name", "Keza"))->asString();
+
+        return to_route(route("dashboard"))
+            ->toast()
+            ->success("Welcome to {$appName}, {$user->name}");
     }
 }

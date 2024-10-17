@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Auth\LoginUser;
 use App\Data\Auth\LoginData;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\DraftLoginRequest;
 use App\Pages\LoginCreatePage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Inertia\Response;
 use Inertia\ResponseFactory;
 
@@ -30,13 +28,21 @@ class LoginController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginData $data): RedirectResponse
+    public function store(LoginData $data, LoginUser $action): RedirectResponse
     {
-        $data->request = request();
-        $data->authenticate();
+        $result = $action->handle($data);
+
         request()->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        if (! $result["ok"]) {
+            session()->alert()->error($result["value"]);
+            return back();
+        }
+
+
+        return redirect()
+            ->intended(route('dashboard', absolute: false))
+            ->toast()->success("Welcome back, {$result["value"]->name}!");
     }
 
     /**
@@ -50,6 +56,9 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect()
+            ->to(route("login"))
+            ->toast()
+            ->info("You have been signed out. Cya next time!");
     }
 }

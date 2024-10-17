@@ -12,7 +12,6 @@ export default function LoginPage() {
     email: '',
     password: '',
     remember: false,
-    request: null,
   })
 
   return (
@@ -39,7 +38,9 @@ export default function LoginPage() {
         className="flex flex-col gap-10"
         onSubmit={(event) => {
           event.preventDefault()
-          form.post('/login')
+          form.post(route('login'), {
+            onFinish: () => form.reset('password'),
+          })
         }}
       >
         {/* <Alert
@@ -75,6 +76,7 @@ export default function LoginPage() {
             label="Password"
             required
             error={form.errors.password}
+            value={form.data.password}
             onChange={(event) => {
               form.setData('password', event.target.value)
             }}

@@ -12,7 +12,7 @@ const theme = createTheme({
 export function ThemeProvider({ children }: PropsWithChildren) {
   return (
     <MantineProvider theme={theme}>
-      <Toaster />
+      <Toaster richColors />
       {children}
     </MantineProvider>
   )

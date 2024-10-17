@@ -3,10 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\ProfileController;
-
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 
 
@@ -16,7 +13,7 @@ Route::get("/", function () {
 
 Route::get('/dashboard', function () {
     return inertia("dashboard/index");
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth',])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

@@ -1,9 +1,12 @@
 import { Head, Link, usePage } from '@inertiajs/react'
-import { Button, Container } from '@mantine/core'
+import { Alert, Button, Container } from '@mantine/core'
 import type { ReactElement, ReactNode } from 'react'
 import { Background } from '~/components/background'
 import { Icon } from '~/components/icons'
 import { Logo } from '~/components/logo'
+import { useAlert } from '~/hooks/use_alert'
+import { useToast } from '~/hooks/use_toast'
+import { PageProps } from '~/types'
 
 type AuthLayoutProps = Readonly<{ children: ReactNode }> & {
   title: string
@@ -15,7 +18,12 @@ export default function AuthLayout({
   intro,
   children,
 }: AuthLayoutProps) {
-  const { props } = usePage()
+  const { toast, alert: alertData } = usePage<PageProps & App.Data.ShareData>()
+    .props
+
+  useToast(toast)
+  const alert = useAlert(alertData)
+
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center bg-zinc-100">
       <Background />
@@ -44,7 +52,17 @@ export default function AuthLayout({
             {intro && intro}
           </section>
         </div>
-
+        {alert && (
+          <Alert
+            variant="light"
+            radius="md"
+            color={alert.color}
+            classNames={{ message: alert.class }}
+            icon={<Icon name={alert.icon} size="lg" className={alert.class} />}
+          >
+            {alert.message}
+          </Alert>
+        )}
         {children}
       </Container>
     </div>

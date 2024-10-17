@@ -1,14 +1,20 @@
-import { Head, Link } from '@inertiajs/react'
+import { Head, Link, usePage } from '@inertiajs/react'
 import { Avatar, Container, Menu } from '@mantine/core'
 import { ReactNode } from 'react'
 import { Icon } from '~/components/icons'
 import { Logo } from '~/components/logo'
+import { useToast } from '~/hooks/use_toast'
+import { PageProps } from '~/types'
 
 type AppLayoutProps = Readonly<{ children: ReactNode }> & {
   title: string
 }
 
 export function AppLayout({ title, children }: AppLayoutProps) {
+  const { toast } = usePage<PageProps & App.Data.ShareData>().props
+
+  useToast(toast)
+
   return (
     <div className="flex min-h-dvh flex-col bg-zinc-100">
       <Head title={title} />
@@ -50,7 +56,14 @@ export function AppLayout({ title, children }: AppLayoutProps) {
                 Settings
               </Menu.Item>
               <Menu.Divider />
-              <Menu.Item leftSection={<Icon name="log-out" />} color="red">
+              <Menu.Item
+                leftSection={<Icon name="log-out" />}
+                color="red"
+                href={route('logout')}
+                component={Link}
+                as="button"
+                method="post"
+              >
                 Logout
               </Menu.Item>
             </Menu.Dropdown>

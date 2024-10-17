@@ -2,7 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Data\NotificationData;
+use App\Data\ShareData;
+use App\Data\UserData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 use Tighten\Ziggy\Ziggy;
 
@@ -30,11 +34,13 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $state = new ShareData(
+            user: fn() => $request->user() ? UserData::from($request->user()) : null
+        );
+
         return [
             ...parent::share($request),
-            'auth' => [
-                'user' => $request->user(),
-            ],
+            ...$state->toArray(),
             'ziggy' => fn() => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),

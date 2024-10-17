@@ -29,7 +29,14 @@ export default function SignupPage() {
         </div>
       }
     >
-      <form className="flex flex-col gap-10">
+      <form
+        className="flex flex-col gap-10"
+        onSubmit={(event) => {
+          event.preventDefault()
+
+          form.post(route('register'))
+        }}
+      >
         <div className="flex flex-col gap-5">
           <TextInput
             required
