@@ -26,10 +26,10 @@ it('can render the reset password screen', function () {
 
     $user = User::factory()->create();
 
-    $this->post(route("password.request"), ['email' => $user->email]);
+    post(route("password.request"), ['email' => $user->email]);
 
-    Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-        get(route("password.reset", ["token" => $notification->token]))->assertOk();
+    Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
+        get(route("password.reset", ["token" => $notification->token]) . "?email={$user->email}")->assertOk();
 
         return true;
     });
