@@ -60,6 +60,6 @@ class LoginController extends Controller
         return redirect()
             ->to(route("login"))
             ->toast()
-            ->info("You have been signed out. Cya next time!");
+            ->info("You have been signed out. See you next time!");
     }
 }
