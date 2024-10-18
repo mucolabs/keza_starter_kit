@@ -7,11 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Pages\PasswordResetLinkCreatePage;
 use Illuminate\Auth\Events\PasswordResetLinkSent;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
 use Inertia\{Response, ResponseFactory};
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class PasswordResetLinkController extends Controller
 {
@@ -28,7 +27,7 @@ class PasswordResetLinkController extends Controller
     /**
      * Handle an incoming password reset link request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+    //  * @throws \Illuminate\Validation\ValidationException
      */
     public function store(PasswordResetLinkData $data): RedirectResponse
     {
@@ -42,11 +41,15 @@ class PasswordResetLinkController extends Controller
         );
 
         if ($status == Password::RESET_LINK_SENT) {
-            return back()->with('status', __($status));
+            session()->alert()->success(__($status));
+            return back();
         }
 
-        throw ValidationException::withMessages([
-            'email' => [trans($status)],
-        ]);
+        // throw ValidationException::withMessages([
+        //     'email' => [trans($status)],
+        // ]);
+
+        session()->alert()->error(trans($status));
+        return back();
     }
 }

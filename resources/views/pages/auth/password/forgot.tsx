@@ -22,7 +22,14 @@ export default function PasswordForgotPage() {
         </div>
       }
     >
-      <form className="flex flex-col gap-10" onSubmit={(event) => {}}>
+      <form
+        className="flex flex-col gap-10"
+        onSubmit={(event) => {
+          event.preventDefault()
+
+          form.post(route('password.email'))
+        }}
+      >
         <TextInput
           name="email"
           placeholder="name@example.com"
