@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Data\Auth\PasswordResetData;
+use App\Enums\FlashMessageType;
 use App\Http\Controllers\Controller;
+use App\Pages\PasswordResetCreatePage;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -13,19 +15,19 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Response, ResponseFactory};
 
 class PasswordResetController extends Controller
 {
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): Response
+    public function create(Request $request): Response | ResponseFactory
     {
-        return Inertia::render('Auth/ResetPassword', [
-            'email' => $request->email,
-            'token' => $request->route('token'),
-        ]);
+        return inertia("auth/password/reset", PasswordResetCreatePage::from([
+            "email" => $request->email,
+            "token" => $request->route("token")
+        ]));
     }
 
     /**
@@ -58,11 +60,20 @@ class PasswordResetController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('status', __($status));
+            // session()->alert()->success(__($status));
+            // return redirect()->route('login')->with('status', __($status));
+            return redirect()->route("login")->with("alert", [
+                "type" => FlashMessageType::Success,
+                "message" => __($status)
+            ]);
         }
 
-        throw ValidationException::withMessages([
-            'email' => [trans($status)],
+        return back()->with("alert", [
+            "type" => FlashMessageType::Error,
+            "message" => trans($status)
         ]);
+        // throw ValidationException::withMessages([
+        //     'email' => [trans($status)],
+        // ]);
     }
 }

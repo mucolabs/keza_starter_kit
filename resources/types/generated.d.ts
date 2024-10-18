@@ -52,6 +52,10 @@ export type LoginCreatePage = {
 canResetPassword: boolean;
 status: string | null;
 };
+export type PasswordResetCreatePage = {
+email: string;
+token: string;
+};
 export type PasswordResetLinkCreatePage = {
 status: string | null;
 };
