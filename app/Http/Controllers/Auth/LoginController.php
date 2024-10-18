@@ -42,7 +42,8 @@ class LoginController extends Controller
 
         return redirect()
             ->intended(route('dashboard', absolute: false))
-            ->toast()->success("Welcome back, {$result["value"]->name}!");
+            ->toast()
+            ->success("Welcome back, {$result["value"]->name}!");
     }
 
     /**

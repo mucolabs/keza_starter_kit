@@ -40,7 +40,7 @@ class SignupController extends Controller
 
         $appName = type(config("app.name", "Keza"))->asString();
 
-        return to_route(route("dashboard"))
+        return redirect(route("dashboard", absolute: false))
             ->toast()
             ->success("Welcome to {$appName}, {$user->name}");
     }

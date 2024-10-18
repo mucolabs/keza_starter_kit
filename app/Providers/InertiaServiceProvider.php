@@ -32,6 +32,14 @@ class InertiaServiceProvider extends ServiceProvider
         });
 
         /**
+         * Registers the alert macro on the session.
+         * @return \App\Notifications\Alert
+         */
+        RedirectResponse::macro("alert", function (): Alert {
+            return new Alert();
+        });
+
+        /**
          * Registers the toast macro on the session
          * @return \App\Notifications\Toast
          */

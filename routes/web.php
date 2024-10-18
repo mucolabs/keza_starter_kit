@@ -13,7 +13,7 @@ Route::get("/", function () {
 
 Route::get('/dashboard', function () {
     return inertia("dashboard/index");
-})->middleware(['auth',])->name('dashboard');
+})->middleware(['auth', "verified"])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {

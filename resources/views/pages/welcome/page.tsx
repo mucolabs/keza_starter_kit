@@ -2,8 +2,11 @@ import { Head, Link } from '@inertiajs/react'
 import { Button, Container } from '@mantine/core'
 import { Background } from '~/components/background'
 import { Logo } from '~/components/logo'
+import { PageProps } from '~/types'
 import { techs } from './data'
-export default function HomePage() {
+
+export default function HomePage({ user }: PageProps) {
+  console.log({ user })
   return (
     <>
       <Head title="A minimalist, beautiful, and production-ready starter kit" />
@@ -54,14 +57,25 @@ export default function HomePage() {
             >
               Explore source code
             </Button>
-            <Button
-              size="md"
-              className="drop-shadow-sm"
-              component={Link}
-              href={route('login')}
-            >
-              Sign in
-            </Button>
+            {user?.email ? (
+              <Button
+                size="md"
+                className="drop-shadow-sm"
+                component={Link}
+                href={route('dashboard')}
+              >
+                Dashboard
+              </Button>
+            ) : (
+              <Button
+                size="md"
+                className="drop-shadow-sm"
+                component={Link}
+                href={route('login')}
+              >
+                Sign in
+              </Button>
+            )}
           </div>
         </Container>
       </div>

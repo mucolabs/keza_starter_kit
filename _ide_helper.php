@@ -18585,6 +18585,16 @@ namespace Illuminate\Http {
      *
      */        class RedirectResponse {
                     /**
+         * Registers the alert macro on the session.
+         *
+         * @return \App\Notifications\Alert 
+         * @see \App\Providers\InertiaServiceProvider::register()
+         * @static 
+         */        public static function alert()
+        {
+                        return \Illuminate\Http\RedirectResponse::alert();
+        }
+                    /**
          * Registers the toast macro on the session
          *
          * @return \App\Notifications\Toast 
@@ -18593,61 +18603,6 @@ namespace Illuminate\Http {
          */        public static function toast()
         {
                         return \Illuminate\Http\RedirectResponse::toast();
-        }
-                    /**
-         * 
-         *
-         * @return \Illuminate\Http\RedirectResponse 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @param \App\Enums\NotificationType $type
-         * @param string $message
-         * @static 
-         */        public static function flash($type, $message)
-        {
-                        return \Illuminate\Http\RedirectResponse::flash($type, $message);
-        }
-                    /**
-         * Sets a successful flash message
-         *
-         * @param string $message - The success message to be displayed
-         * @return \Illuminate\Http\RedirectResponse 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @static 
-         */        public static function success($message)
-        {
-                        return \Illuminate\Http\RedirectResponse::success($message);
-        }
-                    /**
-         * Sets an informational flash message
-         *
-         * @param string $message - The informational message to be displayed
-         * @return \Illuminate\Http\RedirectResponse 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @static 
-         */        public static function info($message)
-        {
-                        return \Illuminate\Http\RedirectResponse::info($message);
-        }
-                    /**
-         * 
-         *
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @param string $message
-         * @static 
-         */        public static function warning($message)
-        {
-                        return \Illuminate\Http\RedirectResponse::warning($message);
-        }
-                    /**
-         * Sets an error flash message
-         *
-         * @param string $message - The error message to be displayed
-         * @return \Illuminate\Http\RedirectResponse 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @static 
-         */        public static function error($message)
-        {
-                        return \Illuminate\Http\RedirectResponse::error($message);
         }
             }
     }

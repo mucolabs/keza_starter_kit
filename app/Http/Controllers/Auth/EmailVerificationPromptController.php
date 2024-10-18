@@ -6,20 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Response, ResponseFactory};
 
 class EmailVerificationPromptController extends Controller
 {
     /**
      * Display the email verification prompt.
      */
-    public function __invoke(Request $request): RedirectResponse|Response
+    public function __invoke(Request $request): RedirectResponse|Response|ResponseFactory
     {
         $user = type($request->user())->as(User::class);
 
         return $user->hasVerifiedEmail()
             ? redirect()->intended(route('dashboard', absolute: false))
-            : Inertia::render('Auth/VerifyEmail', ['status' => session('status')]);
+            : inertia('auth/verify_email');
     }
 }
