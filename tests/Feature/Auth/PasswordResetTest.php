@@ -4,56 +4,51 @@ use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\Facades\Notification;
 
-test('reset password link screen can be rendered', function () {
-    $response = $this->get('/forgot-password');
+use function Pest\Laravel\get;
+use function Pest\Laravel\post;
 
-    $response->assertStatus(200);
+it('can render the reset password link screen', function () {
+    get(route("password.request"))->assertOk();
 });
 
-test('reset password link can be requested', function () {
+it('can request the reset password link', function () {
     Notification::fake();
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    post(route("password.request"), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class);
 });
 
-test('reset password screen can be rendered', function () {
+it('can render the reset password screen', function () {
     Notification::fake();
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    $this->post(route("password.request"), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) {
-        $response = $this->get('/reset-password/'.$notification->token);
-
-        $response->assertStatus(200);
+        get(route("password.reset", ["token" => $notification->token]))->assertOk();
 
         return true;
     });
 });
 
-test('password can be reset with valid token', function () {
+it('can reset the password with valid token', function () {
     Notification::fake();
 
     $user = User::factory()->create();
 
-    $this->post('/forgot-password', ['email' => $user->email]);
+    post(route("password.request"), ['email' => $user->email]);
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
-        $response = $this->post('/reset-password', [
+        post(route("password.store"), [
             'token' => $notification->token,
             'email' => $user->email,
             'password' => 'password',
             'password_confirmation' => 'password',
-        ]);
-
-        $response
-            ->assertSessionHasNoErrors()
-            ->assertRedirect(route('login'));
+        ])->assertSessionHasNoErrors()->assertRedirect(route("login"));
 
         return true;
     });
