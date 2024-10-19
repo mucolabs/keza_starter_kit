@@ -1,9 +1,6 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Auth\Middleware\Authenticate;
-use Illuminate\Contracts\Auth\Authenticatable;
-
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertGuest;
 use function PHPUnit\Framework\assertNotNull;
@@ -13,7 +10,7 @@ use function PHPUnit\Framework\assertSame;
 it('can display the profile page', function () {
     $user = User::factory()->create();
 
-    actingAs(type($user)->as(Authenticatable::class))
+    actingAs(type($user)->as(User::class))
         ->get(route("user.profile"))
         ->assertOk();
 });
@@ -21,7 +18,7 @@ it('can display the profile page', function () {
 it('can update the profile information', function () {
     $user = User::factory()->create();
 
-    actingAs(type($user)->as(Authenticatable::class))
+    actingAs(type($user)->as(User::class))
         ->from(route("user.profile"))
         ->patch(route("profile.update"), [
             'name' => 'Test User',
@@ -40,7 +37,7 @@ it('can update the profile information', function () {
 it('does not change the email verification status if the email address remains the same', function () {
     $user = User::factory()->create();
 
-    actingAs(type($user)->as(Authenticatable::class))
+    actingAs(type($user)->as(User::class))
         ->from(route("user.profile"))
         ->patch(route("profile.update"), [
             'name' => 'Test User',
@@ -55,7 +52,7 @@ it('does not change the email verification status if the email address remains t
 it('can delete a user-owned account', function () {
     $user = User::factory()->create();
 
-    actingAs(type($user)->as(Authenticatable::class))
+    actingAs(type($user)->as(User::class))
         ->delete(route("profile.destroy"), [
             'password' => 'password',
         ])
@@ -69,7 +66,7 @@ it('can delete a user-owned account', function () {
 it('must provide the correct password to delete account', function () {
     $user = User::factory()->create();
 
-    actingAs(type($user)->as(Authenticatable::class))
+    actingAs(type($user)->as(User::class))
         ->from(route("user.settings"))
         ->delete(route("profile.destroy"), [
             'password' => 'wrong-password',

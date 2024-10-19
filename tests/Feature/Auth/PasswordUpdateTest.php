@@ -9,15 +9,15 @@ use function PHPUnit\Framework\assertTrue;
 it('can update the password', function () {
     $user = User::factory()->create();
 
-    $response = actingAs($user)
-        ->from(route("profile.edit"))
+    $response = actingAs(type($user)->as(User::class))
+        ->from(route("user.settings"))
         ->put('/password', [
             'current_password' => 'password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
         ])
         ->assertSessionHasNoErrors()
-        ->assertRedirect(route("profile.edit"));
+        ->assertRedirect(route("user.settings"));
 
     assertTrue(Hash::check('new-password', $user->refresh()->password));
 });
@@ -25,13 +25,13 @@ it('can update the password', function () {
 it('must be a correct password to be updated', function () {
     $user = User::factory()->create();
 
-    actingAs($user)
-        ->from(route("profile.edit"))
+    actingAs(type($user)->as(User::class))
+        ->from(route("user.settings"))
         ->put('/password', [
             'current_password' => 'wrong-password',
             'password' => 'new-password',
             'password_confirmation' => 'new-password',
         ])
         ->assertSessionHasErrors('current_password')
-        ->assertRedirect(route("profile.edit"));
+        ->assertRedirect(route("user.settings"));
 });
