@@ -8,6 +8,8 @@ declare module 'ziggy-js' {
     "profile.edit": [],
     "profile.update": [],
     "profile.destroy": [],
+    "user.profile": [],
+    "user.settings": [],
     "register": [],
     "login": [],
     "password.request": [],

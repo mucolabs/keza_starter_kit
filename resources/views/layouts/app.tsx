@@ -11,21 +11,21 @@ type AppLayoutProps = Readonly<{ children: ReactNode }> & {
 }
 
 export function AppLayout({ title, children }: AppLayoutProps) {
-  const { toast } = usePage<PageProps & App.Data.ShareData>().props
+  const { toast, user } = usePage<PageProps & App.Data.ShareData>().props
 
   useToast(toast)
 
   return (
     <div className="flex min-h-dvh flex-col bg-zinc-100">
       <Head title={title} />
-      <header className="bg-white py-6 ring-1 ring-zinc-950/5">
+      <header className="bg-white py-3 ring-1 ring-zinc-950/5">
         <Container size="md" className="flex items-center justify-between">
           <Logo href={route('dashboard')} />
           <Menu>
             <Menu.Target>
               <Avatar
                 color="initials"
-                name="Tresor Muco"
+                name={user.name}
                 className="hover:cursor-pointer"
               />
             </Menu.Target>
@@ -34,24 +34,22 @@ export function AppLayout({ title, children }: AppLayoutProps) {
               aria-hidden={false}
             >
               <p className="flex flex-col px-3 py-2 text-sm">
-                <span className="block font-bold">Tresor Muco</span>
-                <span className="block text-slate-500">
-                  mucotresor@gmail.com
-                </span>
+                <span className="block font-bold">{user.name}</span>
+                <span className="block text-slate-500">{user.email}</span>
               </p>
               <Menu.Divider />
               <Menu.Label>Manage account</Menu.Label>
               <Menu.Item
                 leftSection={<Icon name="circle-user-round" />}
                 component={Link}
-                href={route('dashboard')}
+                href={route('user.profile')}
               >
                 Profile
               </Menu.Item>
               <Menu.Item
                 leftSection={<Icon name="settings" />}
                 component={Link}
-                href={route('dashboard')}
+                href={route('user.settings')}
               >
                 Settings
               </Menu.Item>
