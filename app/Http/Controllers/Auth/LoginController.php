@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Pages\LoginCreatePage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Response;
 use Inertia\ResponseFactory;
@@ -52,7 +53,7 @@ class LoginController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        auth()->guard("web")->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
 
@@ -61,6 +62,6 @@ class LoginController extends Controller
         return redirect()
             ->to(route("login"))
             ->toast()
-            ->info("You have been signed out. See you next time!");
+            ->info("You’ve been logged out. See you soon!");
     }
 }

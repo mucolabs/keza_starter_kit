@@ -4,6 +4,7 @@ export default {
   content: [
     './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
     './storage/framework/views/*.php',
+    './resources/**/*.{tsx,ts}',
     './resources/views/**/*.{blade.php,tsx,ts}',
     './resources/theme/**/*.{tsx,ts}',
     './resources/components/**/*.tsx',

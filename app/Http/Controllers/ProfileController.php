@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\Auth\AccountDeleteData;
 use App\Data\ProfileData;
 use App\Models\User;
 use App\Pages\ProfileEditPage;
@@ -47,6 +48,7 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+
         $request->validate([
             'password' => ['required', 'current_password'],
         ]);
@@ -60,6 +62,8 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')
+            ->toast()
+            ->info("Your account has been successfully deleted. We're sad to see you go!");
     }
 }
