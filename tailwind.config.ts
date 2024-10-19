@@ -18,7 +18,7 @@ export default {
 
       boxShadow: {
         'highlight': 'inset 0 0 0 1px rgba(255, 255, 255, 0.05)',
-        'input': '0 0 0 1px #417f62',
+        'input': '0 0 0 1px #6366f1',
         'invalid-input': '0 0 0 1px #dc2626',
         'base':
           '0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06)',

@@ -3,14 +3,20 @@ export type FlashData = {
 type: App.Enums.FlashMessageType;
 message: string;
 };
+export type ProfileData = {
+name: string;
+email: string;
+};
 export type ShareData = {
 user: App.Data.UserData;
 toast: App.Data.FlashData | null;
 alert: App.Data.FlashData | null;
 };
 export type UserData = {
+id: number;
 name: string;
 email: string;
+email_verified_at: string | null;
 };
 }
 declare namespace App.Data.Auth {
@@ -55,5 +61,8 @@ token: string;
 };
 export type PasswordResetLinkCreatePage = {
 status: string | null;
+};
+export type ProfileEditPage = {
+mustVerifyEmail: boolean;
 };
 }

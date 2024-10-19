@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
-export function useToast(toastData: App.Data.ToastData | null) {
+export function useToast(toastData: App.Data.FlashData | null) {
   const hasFired = useRef(false)
   useEffect(() => {
     if (toastData && !hasFired.current) {

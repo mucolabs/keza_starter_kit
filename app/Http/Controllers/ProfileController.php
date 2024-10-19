@@ -2,37 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
+use App\Data\ProfileData;
 use App\Models\User;
+use App\Pages\ProfileEditPage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Response, ResponseFactory};
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response
+    public function edit(Request $request): Response|ResponseFactory
     {
-        return Inertia::render('Profile/Edit', [
+        return inertia('user/profile', ProfileEditPage::from([
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
-            'status' => session('status'),
-        ]);
+        ]));
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileData $data): RedirectResponse
     {
-        $user = type($request->user())->as(User::class);
+        $user = type(Auth::user())->as(User::class);
 
-        $user->fill($request->validated());
+        $user->fill($data->all());
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
@@ -40,7 +39,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return Redirect::route('profile.edit');
+        return back()->alert()->success("Profile info have updated");
     }
 
     /**
