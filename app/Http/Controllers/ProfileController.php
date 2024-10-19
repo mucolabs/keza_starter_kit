@@ -39,7 +39,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return back()->alert()->success("Profile info have updated");
+        return back()->toast()->success("Profile info has been updated");
     }
 
     /**

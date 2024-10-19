@@ -38,7 +38,9 @@ export function UpdateProfile({ name, email }: App.Data.ProfileData) {
         />
       </div>
       <div className="self-end">
-        <Button type="submit">Save</Button>
+        <Button type="submit" loading={form.processing}>
+          Save
+        </Button>
       </div>
     </form>
   )

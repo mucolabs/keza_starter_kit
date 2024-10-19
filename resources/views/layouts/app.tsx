@@ -16,7 +16,7 @@ export function AppLayout({ title, children }: AppLayoutProps) {
   useToast(toast)
 
   return (
-    <div className="flex min-h-dvh flex-col bg-zinc-100">
+    <div className="flex min-h-dvh flex-col bg-slate-100">
       <Head title={title} />
       <header className="bg-white py-3 ring-1 ring-zinc-950/5">
         <Container size="md" className="flex items-center justify-between">
@@ -72,7 +72,7 @@ export function AppLayout({ title, children }: AppLayoutProps) {
       <main className="my-16 flex h-full flex-1">
         <Container
           size="md"
-          className="flex w-full flex-col gap-8 bg-white p-6 ring-1 ring-zinc-950/5 sm:p-10 lg:rounded-2xl lg:p-10"
+          className="flex w-full flex-col gap-8 border border-slate-200 bg-white p-6 sm:p-10 lg:rounded-2xl lg:p-10"
         >
           {children}
         </Container>

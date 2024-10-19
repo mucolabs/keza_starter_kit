@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Data\Auth\PasswordData;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Auth;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,12 +19,13 @@ class PasswordController extends Controller
      */
     public function update(PasswordData $data): RedirectResponse
     {
-        $user = type(request()->user())->as(User::class);
+        if (Auth::user()) {
+            Auth::user()->update([
+                'password' => Hash::make($data->password),
+            ]);
+            return back()->toast()->success("Password has been updated");
+        }
 
-        $user->update([
-            'password' => Hash::make($data->password),
-        ]);
-
-        return back();
+        return redirect()->route("login")->alert()->error("Please log in to update your password.");
     }
 }

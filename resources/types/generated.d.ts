@@ -28,6 +28,7 @@ remember: boolean;
 export type PasswordData = {
 current_password: string;
 password: string;
+password_confirmation: string;
 };
 export type PasswordResetData = {
 token: string;
