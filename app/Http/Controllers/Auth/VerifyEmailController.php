@@ -25,6 +25,11 @@ class VerifyEmailController extends Controller
             event(new Verified($user));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false) . '?verified=1');
+        $appName = type(config("app.name", "Keza"))->asString();
+
+        return redirect()
+            ->intended(route('dashboard', absolute: false) . '?verified=1')
+            ->toast()
+            ->success("Welcome to {$appName}, {$user->name}");
     }
 }

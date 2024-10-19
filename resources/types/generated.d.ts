@@ -1,16 +1,12 @@
 declare namespace App.Data {
-export type AlertData = {
+export type FlashData = {
 type: App.Enums.FlashMessageType;
 message: string;
 };
 export type ShareData = {
 user: App.Data.UserData;
-toast: App.Data.ToastData | null;
-alert: App.Data.AlertData | null;
-};
-export type ToastData = {
-type: App.Enums.FlashMessageType;
-message: string;
+toast: App.Data.FlashData | null;
+alert: App.Data.FlashData | null;
 };
 export type UserData = {
 name: string;
@@ -44,6 +40,7 @@ password_confirmation: string;
 };
 }
 declare namespace App.Enums {
+export type FlashKey = 'alert' | 'toast';
 export type FlashMessageType = 'success' | 'info' | 'error' | 'warning';
 export type NotificationType = 'success' | 'info' | 'error' | 'warning';
 }

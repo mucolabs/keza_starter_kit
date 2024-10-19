@@ -35,8 +35,9 @@ class LoginController extends Controller
         request()->session()->regenerate();
 
         if (! $result["ok"]) {
-            session()->alert()->error($result["value"]);
-            return back();
+            return back()
+                ->alert()
+                ->error($result["value"]);
         }
 
 

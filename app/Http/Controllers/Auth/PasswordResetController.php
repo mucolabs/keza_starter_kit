@@ -12,9 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rules;
-use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
 use Inertia\{Response, ResponseFactory};
 
 class PasswordResetController extends Controller
@@ -60,20 +57,14 @@ class PasswordResetController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
-            // session()->alert()->success(__($status));
-            // return redirect()->route('login')->with('status', __($status));
-            return redirect()->route("login")->with("alert", [
-                "type" => FlashMessageType::Success,
-                "message" => __($status)
-            ]);
+            return redirect()
+                ->route("login")
+                ->alert()
+                ->success(__($status));
         }
 
-        return back()->with("alert", [
-            "type" => FlashMessageType::Error,
-            "message" => trans($status)
-        ]);
-        // throw ValidationException::withMessages([
-        //     'email' => [trans($status)],
-        // ]);
+        return back()
+            ->alert()
+            ->error(trans($status));
     }
 }

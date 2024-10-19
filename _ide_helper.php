@@ -15792,16 +15792,6 @@ namespace Illuminate\Support\Facades {
         {
                         \Illuminate\Session\Store::flushMacros();
         }
-                    /**
-         * Registers the alert macro on the session.
-         *
-         * @return \App\Notifications\Alert 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @static 
-         */        public static function alert()
-        {
-                        return \Illuminate\Session\Store::alert();
-        }
             }
             /**
      * 
@@ -18585,9 +18575,13 @@ namespace Illuminate\Http {
      *
      */        class RedirectResponse {
                     /**
-         * Registers the alert macro on the session.
+         * Registers the `alert` function on the RedirectResponse.
+         * 
+         * This function sets an alert session with the specified type (success|error|info|warning)
+         * and message as its data. On the frontend, it is intended to
+         * communicate a state that affects a system, feature or page.
          *
-         * @return \App\Notifications\Alert 
+         * @return \App\Notifications\FlashNotification 
          * @see \App\Providers\InertiaServiceProvider::register()
          * @static 
          */        public static function alert()
@@ -18595,9 +18589,13 @@ namespace Illuminate\Http {
                         return \Illuminate\Http\RedirectResponse::alert();
         }
                     /**
-         * Registers the toast macro on the session
+         * Registers the `toast` function on the RedirectResponse.
+         * 
+         * This function sets a toast session with the specified type (success|error|info|warning)
+         * and message as its data. On the frontend, it is intended to
+         * display a temporary message to the user
          *
-         * @return \App\Notifications\Toast 
+         * @return \App\Notifications\FlashNotification 
          * @see \App\Providers\InertiaServiceProvider::register()
          * @static 
          */        public static function toast()
@@ -18653,24 +18651,6 @@ namespace Illuminate\Testing {
          */        public static function inertiaPage()
         {
                         return \Illuminate\Testing\TestResponse::inertiaPage();
-        }
-            }
-    }
-
-namespace Illuminate\Session {
-            /**
-     * 
-     *
-     */        class Store {
-                    /**
-         * Registers the alert macro on the session.
-         *
-         * @return \App\Notifications\Alert 
-         * @see \App\Providers\InertiaServiceProvider::register()
-         * @static 
-         */        public static function alert()
-        {
-                        return \Illuminate\Session\Store::alert();
         }
             }
     }

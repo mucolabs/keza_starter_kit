@@ -12,8 +12,8 @@ class ShareData extends Data
     public function __construct(
         #[TypeScriptType(UserData::class)]
         public ?Closure $user = null,
-        public ?ToastData $toast = null,
-        public ?AlertData $alert = null,
+        public ?FlashData $toast = null,
+        public ?FlashData $alert = null,
     ) {
         $this->shareAlert();
         $this->shareToastNotification();
@@ -22,7 +22,7 @@ class ShareData extends Data
     protected function shareToastNotification(): void
     {
         if (session("toast")) {
-            $this->toast = new ToastData(
+            $this->toast = new FlashData(
                 ...type(session("toast"))->asArray()
             );
         }
@@ -35,7 +35,7 @@ class ShareData extends Data
              * We are using ToastData here
              * because they're basically the same
              */
-            $this->alert = new AlertData(
+            $this->alert = new FlashData(
                 ...type(session("alert"))->asArray()
             );
         }
