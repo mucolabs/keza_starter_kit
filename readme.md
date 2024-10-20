@@ -36,7 +36,7 @@ Here’s the list of features included in the Keza starter kit:
 - Code Formatting with [**Prettier**](https://prettier.io/) and [**Pint**](https://laravel.com/docs/11.x/pint).
 - Linting with [**ESLint**](https://eslint.org/).
 - Static types with [**TypeScript**](https://www.typescriptlang.org/) and static analysis with [**PHPStan**](https://phpstan.org/).
-- Typed Route Inference on the Frontend with [**Momentum Trail**](https://github.com/lepikhinb/momentum-trail).
+- Typed Route Inference on the Frontend
 - Production-Ready [**SQLite**](https://www.sqlite.org) Database.
 - [**Fly app deployment**](https://fly.io/) with [**Docker**](https://www.docker.com/)
 - [**GitHub Actions**](https://github.com/features/actions) for deploy on merge to production and staging environments
