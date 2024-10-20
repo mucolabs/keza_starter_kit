@@ -2,9 +2,20 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+        />
         <title inertia>A minimalist, beautiful, and production-ready starter kit - {{config('app.name', 'Keza')}}</title>
-        <!-- Scripts -->
+         <!-- Scripts -->
+        <script data-mantine-script="true">
+        try {
+            var _colorScheme = window.localStorage.getItem("mantine-color-scheme-value");
+            var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "light";
+            var computedColorScheme = colorScheme !== "auto" ? colorScheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+            document.documentElement.setAttribute("data-mantine-color-scheme", computedColorScheme);
+        } catch (e) { }
+        </script>
         @routes
         @viteReactRefresh
         @vite([
@@ -14,17 +25,8 @@
             "resources/views/pages/{$page['component']}.tsx"
         ])
         @inertiaHead
-
-        <script data-mantine-script="true">
-            try {
-                var _colorScheme = window.localStorage.getItem("mantine-color-scheme-value");
-                var colorScheme = _colorScheme === "light" || _colorScheme === "dark" || _colorScheme === "auto" ? _colorScheme : "light";
-                var computedColorScheme = colorScheme !== "auto" ? colorScheme : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-                document.documentElement.setAttribute("data-mantine-color-scheme", computedColorScheme);
-            } catch (e) { }
-        </script>
     </head>
     <body  class="font-sans antialiased  selection:bg-brand-50 selection:text-brand-500 text-slate-800 min-h-dvh" >
-            @inertia
-        </body>
+        @inertia
+    </body>
 </html>
