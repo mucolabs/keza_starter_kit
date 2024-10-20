@@ -24,7 +24,7 @@
             } catch (e) { }
         </script>
     </head>
-    <body  class="font-sans antialiased selection:bg-brand-50 selection:text-brand-500 text-slate-800 min-h-dvh" >
+    <body  class="font-sans antialiased  selection:bg-brand-50 selection:text-brand-500 text-slate-800 min-h-dvh" >
             @inertia
         </body>
 </html>

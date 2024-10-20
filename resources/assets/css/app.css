@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  min-width: 360px;
+  scrollbar-gutter: stable;
+  font-feature-settings:
+    'liga' 1,
+    'calt' 1; /* fix for Chrome */
+  font-variation-settings:
+    'opsz' 16,
+    'wght' 400;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+  font-variation-settings: 'opsz' 32;
+}
+
 /*
   Author's note: The styles for this gradient grid background is heavily inspired by
   Paco & Rauno's amazing CMDK site (https://cmdk.paco.me) – all credits go to them!

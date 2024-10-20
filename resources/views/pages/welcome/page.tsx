@@ -17,7 +17,7 @@ export default function HomePage({ user }: PageProps) {
         >
           <div className="flex flex-col items-center justify-center gap-6">
             <Logo href="/" className="text-4xl" />
-            <h1 className="text-pretty text-center text-4xl font-bold leading-tight text-slate-800 md:text-7xl lg:leading-tight">
+            <h1 className="text-pretty text-center font-sans text-4xl font-bold leading-tight text-slate-800 md:text-7xl lg:leading-tight">
               Minimalist & Beautiful Production-Ready Starter Kit
             </h1>
             <p className="mx-auto max-w-2xl text-pretty text-center text-lg md:text-xl">
