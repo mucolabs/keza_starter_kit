@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { Alert, Button, Container } from '@mantine/core'
 import type { ReactElement, ReactNode } from 'react'
 import { Background } from '~/components/background'
@@ -41,8 +41,9 @@ export default function AuthLayout({
                   size="xs"
                   variant="light"
                   leftSection={<Icon name="phone" />}
-                  component={Link}
-                  href="/contact"
+                  component="a"
+                  href="https://x.com/mucotreso"
+                  target="_blank"
                 >
                   Contact Us
                 </Button>
