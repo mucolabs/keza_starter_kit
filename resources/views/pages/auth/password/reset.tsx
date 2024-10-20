@@ -61,7 +61,9 @@ export default function AuthPasswordResetPage({
         </div>
 
         <div className="flex justify-end">
-          <Button type="submit">Reset Password</Button>
+          <Button type="submit" loading={form.processing}>
+            Reset Password
+          </Button>
         </div>
       </form>
     </AuthLayout>
