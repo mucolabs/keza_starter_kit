@@ -49,12 +49,13 @@ export default function HomePage({ user }: PageProps) {
             <Button
               variant="outline"
               color="gray"
-              className="bg-white drop-shadow-sm"
+              className="bg-white"
               size="md"
               component="a"
-              href=""
+              href="https://github.com/mucolabs/keza_starter_kit"
+              target="_blank"
             >
-              Explore source code
+              Explore the source code
             </Button>
             {user?.email ? (
               <Button
@@ -66,12 +67,7 @@ export default function HomePage({ user }: PageProps) {
                 Dashboard
               </Button>
             ) : (
-              <Button
-                size="md"
-                className="drop-shadow-sm"
-                component={Link}
-                href={route('login')}
-              >
+              <Button size="md" component={Link} href={route('login')}>
                 Sign in
               </Button>
             )}
