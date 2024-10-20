@@ -18,6 +18,7 @@
 	| "phone"
 	| "resend"
 	| "settings"
+	| "sqlite"
 	| "triangle-alert"
 	| "user-round"
 	| "user"

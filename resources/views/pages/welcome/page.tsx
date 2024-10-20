@@ -6,7 +6,6 @@ import { PageProps } from '~/types'
 import { techs } from './data'
 
 export default function HomePage({ user }: PageProps) {
-  console.log({ user })
   return (
     <>
       <Head title="A minimalist, beautiful, and production-ready starter kit" />
@@ -14,7 +13,7 @@ export default function HomePage({ user }: PageProps) {
         <Background />
         <Container
           size="md"
-          className="z-50 flex flex-col items-center justify-center gap-6"
+          className="z-50 flex flex-col items-center justify-center gap-6 py-24"
         >
           <div className="flex flex-col items-center justify-center gap-6">
             <Logo href="/" className="text-4xl" />
