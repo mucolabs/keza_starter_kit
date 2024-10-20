@@ -22,6 +22,7 @@ declare module 'ziggy-js' {
     ],
     "debugbar.queries.explain": [],
     "sanctum.csrf-cookie": [],
+    "resend.webhook": [],
     "execute-laravel-error-solution": [],
     "welcome": [],
     "dashboard": [],

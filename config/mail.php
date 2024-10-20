@@ -23,7 +23,7 @@ return [
     |
     | Here you may configure all of the mailers used by your application plus
     | their respective settings. Several examples have been configured for
-    | you and you are free to add your own as your application requires.
+    | you and you are free to add your own as your applica  tion requires.
     |
     | Laravel supports a variety of mail "transport" drivers that can be used
     | when delivering an email. You may specify which one you're using for
@@ -36,6 +36,9 @@ return [
     */
 
     'mailers' => [
+        'resend' => [
+            'transport' => 'resend',
+        ],
 
         'smtp' => [
             'transport' => 'smtp',
