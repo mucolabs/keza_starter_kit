@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for keza-starter-kit on 2024-10-20T17:07:58+02:00
+# fly.toml app configuration file generated for keza on 2024-10-20T18:45:26+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'keza-starter-kit'
+app = 'keza'
 primary_region = 'jnb'
 console_command = 'php /var/www/html/artisan tinker'
 
@@ -11,9 +11,6 @@ console_command = 'php /var/www/html/artisan tinker'
   [build.args]
     NODE_VERSION = '18'
     PHP_VERSION = '8.2'
-
-[deploy]
-  strategy = 'bluegreen'
 
 [env]
   APP_ENV = 'production'
@@ -41,13 +38,6 @@ console_command = 'php /var/www/html/artisan tinker'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
-
-  [[http_service.checks]]
-    interval = '30s'
-    timeout = '5s'
-    grace_period = '10s'
-    method = 'GET'
-    path = '/'
 
 [[vm]]
   memory = '512mb'
