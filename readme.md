@@ -17,12 +17,12 @@ A minimalist, beautiful, and production-ready starter kit
   </p>
 </div>
 
+> We've created a simple demo showcasing all the features this starter kit offers. Click the button below to explore it.
+> Note that the app is deployed on a small server with limited resources, so it may run slowly. It also periodically clears all data to conserve storage space.
+
 ## [Live Demo](https://keza.tmuco.dev)
 
 [![Keza Starter Kit](https://github.com/mucolabs/keza_starter_kit/blob/main/public/welcome_page.png)](https://keza.tmuco.dev)
-
-> We've created a simple demo showcasing all the features this starter kit offers. Click the button below to explore it.
-> Note that the app is deployed on a small server with limited resources, so it may run slowly. It also periodically clears all data to conserve storage space.
 
 ## What's in the Starter Kit
 
