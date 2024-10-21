@@ -45,6 +45,23 @@ Here’s the list of features included in the Keza starter kit:
 - [**Fly app deployment**](https://fly.io/) with [**Docker**](https://www.docker.com/)
 - [**GitHub Actions**](https://github.com/features/actions) for deploy on merge to production and staging environments
 
+## Installation
+
+```bash
+git clone git@github.com:mucolabs/keza_starter_kit.git
+cd keza_starter_kit
+
+cp .env.example .env
+composer install
+npm install
+
+php artisan key:generate
+
+php artisan migrate
+
+composer run dev
+```
+
 ## Support
 
 If you found the Keza starter kit helpful, please consider supporting it with a star. Thank you!

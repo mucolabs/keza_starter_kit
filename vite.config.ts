@@ -26,7 +26,6 @@ export default defineConfig(({ isSsrBuild }) => ({
       command: 'php artisan ziggy:generate resources/routes/ziggy --types',
     }),
   ],
-  server: { https: true },
   resolve: {
     alias: {
       '~/': '/resources/',
