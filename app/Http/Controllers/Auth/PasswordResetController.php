@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Data\Auth\PasswordResetData;
-use App\Enums\FlashMessageType;
 use App\Http\Controllers\Controller;
 use App\Pages\PasswordResetCreatePage;
 use Illuminate\Auth\Events\PasswordReset;

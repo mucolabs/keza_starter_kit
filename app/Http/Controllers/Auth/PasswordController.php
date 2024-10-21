@@ -4,13 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Data\Auth\PasswordData;
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Auth;
-use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
 
 class PasswordController extends Controller
 {

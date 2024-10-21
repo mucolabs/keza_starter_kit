@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\Auth\AccountDeleteData;
 use App\Data\ProfileData;
 use App\Models\User;
 use App\Pages\ProfileEditPage;

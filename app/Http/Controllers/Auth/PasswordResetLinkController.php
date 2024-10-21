@@ -5,12 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Data\Auth\PasswordResetLinkData;
 use App\Http\Controllers\Controller;
 use App\Pages\PasswordResetLinkCreatePage;
-use Illuminate\Auth\Events\PasswordResetLinkSent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Validation\ValidationException;
 use Inertia\{Response, ResponseFactory};
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 
 class PasswordResetLinkController extends Controller
 {
