@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\URL;
 use function Pest\Laravel\actingAs;
 
 it('can render the email verification screen', function () {
-    $user = User::factory()->unverified()->create();
+    $user = type(User::factory()->unverified()->create())->as(User::class);
 
     actingAs($user)
         ->get(route("verification.notice"))
@@ -16,7 +16,7 @@ it('can render the email verification screen', function () {
 });
 
 it('can verify email', function () {
-    $user = User::factory()->unverified()->create();
+    $user = type(User::factory()->unverified()->create())->as(User::class);
 
     Event::fake();
 
@@ -35,7 +35,7 @@ it('can verify email', function () {
 });
 
 it('cannot verify an email with an invalid hash', function () {
-    $user = User::factory()->unverified()->create();
+    $user = type(User::factory()->unverified()->create())->as(User::class);
 
     $verificationUrl = URL::temporarySignedRoute(
         'verification.verify',

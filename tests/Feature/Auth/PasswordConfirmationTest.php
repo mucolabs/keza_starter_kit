@@ -5,7 +5,7 @@ use App\Models\User;
 use function Pest\Laravel\actingAs;
 
 it('can render the confirm password screen', function () {
-    $user = User::factory()->create();
+    $user = type(User::factory()->create())->as(User::class);
 
     actingAs($user)
         ->get(route("password.confirm"))
@@ -13,7 +13,7 @@ it('can render the confirm password screen', function () {
 });
 
 it('can confirm the password', function () {
-    $user = User::factory()->create();
+    $user = type(User::factory()->create())->as(User::class);
 
     actingAs($user)
         ->post(route("password.confirm"), ['password' => 'password'])
@@ -22,7 +22,7 @@ it('can confirm the password', function () {
 });
 
 it('cannot confirm an invalid password', function () {
-    $user = User::factory()->create();
+    $user = type(User::factory()->create())->as(User::class);
 
     actingAs($user)
         ->post(route("password.confirm"), ['password' => 'wrong-password'])
