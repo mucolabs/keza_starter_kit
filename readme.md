@@ -45,7 +45,7 @@ Here’s the list of features included in the Keza starter kit:
 - [**Fly app deployment**](https://fly.io/) with [**Docker**](https://www.docker.com/)
 - [**GitHub Actions**](https://github.com/features/actions) for deploy on merge to production and staging environments
 
-## Running It Locally Guide
+## Local Installation Guide
 
 Before you begin, ensure your system meets the following requirements:
 
@@ -54,7 +54,11 @@ Before you begin, ensure your system meets the following requirements:
 - **Node.js 20** or higher
 - **SQLite** (used as the database)
 
-You can streamline the setup process by running the install script: `./install.sh`
+You can streamline the setup process by running the install script:
+
+```bash
+./install.sh
+```
 
 Alternatively, follow these steps manually:
 
@@ -69,7 +73,7 @@ cp .env.example .env
 
 > [!NOTE]
 >
-> - Note that the `.env` file holds sensitive configurations like app keys.
+> - The `.env` file holds sensitive configurations like app keys.
 > - Ensure `DB_CONNECTION=sqlite` is set, and the path to your SQLite database file (e.g., `database/database.sqlite`) is correctly configured.
 > - Modify other environment variables as needed.
 
@@ -101,7 +105,3 @@ Special thanks to [Daniel Kanem](https://github.com/dev-xo) and [Josh Cirre](htt
 ## License
 
 The Keza starter kit is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT). You are free to use the code for inspiration, though crediting the author is appreciated.
-
-```
-
-```
