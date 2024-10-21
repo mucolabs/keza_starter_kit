@@ -8,7 +8,7 @@ it('can render the confirm password screen', function () {
     $user = type(User::factory()->create())->as(User::class);
 
     actingAs($user)
-        ->get(route("password.confirm"))
+        ->get('/confirm-password')
         ->assertOk();
 });
 

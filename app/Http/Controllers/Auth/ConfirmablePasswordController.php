@@ -8,17 +8,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
-use Inertia\Response;
+use Inertia\{Response, ResponseFactory};
 
 class ConfirmablePasswordController extends Controller
 {
     /**
      * Show the confirm password view.
      */
-    public function show(): Response
+    public function show(): Response|ResponseFactory
     {
-        return Inertia::render('auth/password/confirm');
+        return inertia('auth/password/confirm');
     }
 
     /**
