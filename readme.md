@@ -45,20 +45,48 @@ Here’s the list of features included in the Keza starter kit:
 - [**Fly app deployment**](https://fly.io/) with [**Docker**](https://www.docker.com/)
 - [**GitHub Actions**](https://github.com/features/actions) for deploy on merge to production and staging environments
 
-## Installation
+## Running It Locally Guide
+
+Before you begin, ensure your system meets the following requirements:
+
+- **PHP 8.x** or higher
+- **Composer** (latest version)
+- **Node.js 20** or higher
+- **SQLite** (used as the database)
+
+You can streamline the setup process by running the install script: `./install.sh`
+
+Alternatively, follow these steps manually:
 
 ```bash
+# Clone the repository and navigate into the project directory
 git clone git@github.com:mucolabs/keza_starter_kit.git
 cd keza_starter_kit
 
+# Copy the example environment file
 cp .env.example .env
+```
+
+> [!NOTE]
+>
+> - Note that the `.env` file holds sensitive configurations like app keys.
+> - Ensure `DB_CONNECTION=sqlite` is set, and the path to your SQLite database file (e.g., `database/database.sqlite`) is correctly configured.
+> - Modify other environment variables as needed.
+
+```bash
+# Install PHP dependencies
 composer install
+
+# Install JavaScript dependencies
 npm install
 
+# Generate the application key for secure encryption
 php artisan key:generate
 
+# Run database migrations to set up the required tables
 php artisan migrate
 
+# Start the development server and Access the application by visiting: http://localhost:8000
 composer run dev
 ```
 
@@ -73,3 +101,7 @@ Special thanks to [Daniel Kanem](https://github.com/dev-xo) and [Josh Cirre](htt
 ## License
 
 The Keza starter kit is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT). You are free to use the code for inspiration, though crediting the author is appreciated.
+
+```
+
+```
