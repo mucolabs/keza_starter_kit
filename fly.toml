@@ -21,7 +21,8 @@ console_command = 'php /var/www/html/artisan tinker'
   LOG_STDERR_FORMATTER = 'Monolog\Formatter\JsonFormatter'
   SESSION_DRIVER = 'cookie'
   SESSION_SECURE_COOKIE = 'true'
-  SSR_URL = 'ssr.process.keza-starter-kit.internal:13714'
+  SSR_URL = 'ssr.process.keza-starter-kit.internal:13714',
+  ASSETS_URL = "https://keza.tmuco.dev"
 
 [processes]
   app = ''
