@@ -2,9 +2,6 @@
 
 namespace App\Data\Auth;
 
-
-use Illuminate\Http\Request;
-
 use Spatie\LaravelData\Data;
 
 class LoginData extends Data
