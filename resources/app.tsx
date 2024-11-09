@@ -5,6 +5,7 @@ import '~/bootstrap'
 
 import { createInertiaApp } from '@inertiajs/react'
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers'
+import { StrictMode } from 'react'
 import { createRoot, hydrateRoot } from 'react-dom/client'
 import { seo } from '~/config/seo'
 import { ThemeProvider } from '~/theme'
@@ -25,18 +26,21 @@ createInertiaApp({
   setup({ el, App, props }) {
     if (import.meta.env.DEV) {
       createRoot(el).render(
-        <ThemeProvider>
-          <App {...props} />
-        </ThemeProvider>
+        <StrictMode>
+          <ThemeProvider>
+            <App {...props} />
+          </ThemeProvider>
+        </StrictMode>
       )
       return
     }
-
     hydrateRoot(
       el,
-      <ThemeProvider>
-        <App {...props} />
-      </ThemeProvider>
+      <StrictMode>
+        <ThemeProvider>
+          <App {...props} />
+        </ThemeProvider>
+      </StrictMode>
     )
   },
 })

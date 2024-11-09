@@ -3,6 +3,10 @@ import laravel from 'laravel-vite-plugin'
 import { defineConfig } from 'vite'
 import { watch } from 'vite-plugin-watch'
 
+const ReactCompilerConfig = {
+  target: '18', // '17' | '18' | '19'
+}
+
 export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     laravel({
@@ -14,7 +18,12 @@ export default defineConfig(({ isSsrBuild }) => ({
       ssr: 'resources/ssr.tsx',
       refresh: true,
     }),
-    react(),
+
+    react({
+      babel: {
+        plugins: [['babel-plugin-react-compiler', ReactCompilerConfig]],
+      },
+    }),
 
     watch({
       pattern: 'app/{Data,Enums,Pages}/**/*.php',
