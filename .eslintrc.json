@@ -6,33 +6,28 @@
     "plugin:react/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:tailwindcss/recommended",
+    "prettier"
   ],
 
   "settings": {
-    "react": {
-      "version": "detect"
-    }
+    "react": { "version": "detect" }
   },
+
   "rules": {
     "react-compiler/react-compiler": "error",
     "react/react-in-jsx-scope": "off",
     "tailwindcss/classnames-order": "off",
-    "tailwindcss/no-custom-classname": [
-      "warn",
-      {
-        "callees": ["twMerge"],
-        "cssFiles": []
-      }
-    ]
-  }
+    "tailwindcss/no-custom-classname": "off"
+  },
+  "overrides": [
+    {
+      "files": ["resources/**/*.{ts,tsx,css}"],
+      "excludedFiles": ["resources/routes/**/*"]
+    }
+  ]
 }
-
-/*
-"eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended",
-
-*/

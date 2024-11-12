@@ -1,7 +1,7 @@
 import { InertiaLinkProps, Link } from '@inertiajs/react'
 import { cn } from '~/utils/css'
 
-type LogoProps = InertiaLinkProps & {}
+type LogoProps = InertiaLinkProps
 
 export function Logo({ href = '/', className, ...restProps }: LogoProps) {
   return (

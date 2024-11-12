@@ -43,7 +43,6 @@ export default function PasswordForgotPage() {
           label="Addresse email"
           required
           error={form.errors.email}
-          autoFocus
           onChange={(event) => form.setData('email', event.target.value)}
         />
 

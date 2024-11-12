@@ -1,13 +1,8 @@
-import { Link, useForm, usePage } from '@inertiajs/react'
+import { Link, useForm } from '@inertiajs/react'
 import { Button, Checkbox, PasswordInput, TextInput } from '@mantine/core'
-import { PageProps } from '~/types'
 import AuthLayout from '~/views/layouts/auth'
 
 export default function LoginPage() {
-  const { status, canResetPassword } = usePage<
-    PageProps & App.Pages.LoginCreatePage
-  >().props
-
   const form = useForm<App.Data.Auth.LoginData>({
     email: '',
     password: '',
