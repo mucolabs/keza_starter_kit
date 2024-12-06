@@ -14,16 +14,34 @@ server {
 
     access_log /dev/stdout fly;
 
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
+    location /index.php {
+        try_files /not_exists @octane;
     }
 
-    location ~ \.php$ {
-        include snippets/fastcgi-php.conf;
-        fastcgi_param HTTP_X_FORWARDED_FOR $http_fly_client_ip;
-        fastcgi_pass unix:/var/run/php/php-fpm.sock;
-        fastcgi_buffers  16 16k;
-        fastcgi_buffer_size  32k;
+    location / {
+        try_files $uri $uri/ @octane;
+    }
+
+    location @octane {
+        set $suffix "";
+
+        if ($uri = /index.php) {
+            set $suffix ?$query_string;
+        }
+
+        proxy_http_version 1.1;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header SERVER_PORT $server_port;
+        proxy_set_header REMOTE_ADDR $remote_addr;
+        proxy_set_header X-Forwarded-For $http_fly_client_ip;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+
+        proxy_buffers 16 16k;
+        proxy_buffer_size  32k;
+
+        proxy_pass http://127.0.0.1:8000$suffix;
     }
 
     location = /favicon.ico {
@@ -41,7 +59,7 @@ server {
         access_log off;
         log_not_found off;
         # Pass to PHP to ensure PHP apps can handle routes that end in these filetypes
-        try_files $uri /index.php?$query_string;
+        try_files $uri @octane;
     }
 
     location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {

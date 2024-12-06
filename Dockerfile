@@ -1,11 +1,12 @@
 # syntax = docker/dockerfile:experimental
 
-ARG PHP_VERSION=8.4
-ARG NODE_VERSION=22.12
+ARG PHP_VERSION=8.2
+ARG NODE_VERSION=18
 FROM ubuntu:22.04 as base
 LABEL fly_launch_runtime="laravel"
 
-# Re-define PHP_VERSION after FROM
+# PHP_VERSION needs to be repeated here
+# See https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION
 ENV DEBIAN_FRONTEND=noninteractive \
     COMPOSER_ALLOW_SUPERUSER=1 \
@@ -31,10 +32,11 @@ COPY .fly/php/ondrej_ubuntu_php.gpg /etc/apt/trusted.gpg.d/ondrej_ubuntu_php.gpg
 ADD .fly/php/packages/${PHP_VERSION}.txt /tmp/php-packages.txt
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends gnupg2 ca-certificates git-core curl zip unzip rsync vim-tiny htop sqlite3 nginx supervisor cron \
+    && apt-get install -y --no-install-recommends gnupg2 ca-certificates git-core curl zip unzip \
+                                                  rsync vim-tiny htop sqlite3 nginx supervisor cron \
     && ln -sf /usr/bin/vim.tiny /etc/alternatives/vim \
     && ln -sf /etc/alternatives/vim /usr/bin/vim \
-    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ondrej-ubuntu-php.list \
+    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ondrej-ubuntu-php-focal.list \
     && apt-get update \
     && apt-get -y --no-install-recommends install $(cat /tmp/php-packages.txt) \
     && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm \
@@ -42,7 +44,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-# 2. Copy config files
+# 2. Copy config files to proper locations
 COPY .fly/nginx/ /etc/nginx/
 COPY .fly/fpm/ /etc/php/${PHP_VERSION}/fpm/
 COPY .fly/supervisor/ /etc/supervisor/
@@ -50,7 +52,7 @@ COPY .fly/entrypoint.sh /entrypoint
 COPY .fly/start-nginx.sh /usr/local/bin/start-nginx
 RUN chmod 754 /usr/local/bin/start-nginx
 
-# 3. Copy application code
+# 3. Copy application code, skipping files based on .dockerignore
 COPY . /var/www/html
 WORKDIR /var/www/html
 
@@ -61,7 +63,7 @@ RUN composer install --optimize-autoloader --no-dev \
     && chown -R www-data:www-data /var/www/html \
     && echo "MAILTO=\"\"\n* * * * * www-data /usr/bin/php /var/www/html/artisan schedule:run" > /etc/cron.d/laravel \
     && sed -i='' '/->withMiddleware(function (Middleware \$middleware) {/a\
-        $middleware->trustProxies(at: "*");\
+        \$middleware->trustProxies(at: "*");\
     ' bootstrap/app.php; \
     if [ -d .fly ]; then cp .fly/entrypoint.sh /entrypoint; chmod +x /entrypoint; fi;
 
@@ -69,6 +71,7 @@ RUN rm -rf /etc/supervisor/conf.d/fpm.conf; \
     mv /etc/supervisor/octane-swoole.conf /etc/supervisor/conf.d/octane-swoole.conf; \
     rm /etc/nginx/sites-enabled/default; \
     ln -sf /etc/nginx/sites-available/default-octane /etc/nginx/sites-enabled/default;
+
 
 
 ##############################################
@@ -109,5 +112,7 @@ RUN rsync -ar /var/www/html/public-bun/ /var/www/html/public/ \
     && rm -rf /var/www/html/public-bun \
     && chown -R www-data:www-data /var/www/html/public
 
+# 5. Setup Entrypoint
 EXPOSE 8080
+
 ENTRYPOINT ["/entrypoint"]
